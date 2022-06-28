@@ -1,0 +1,758 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1. Scala’s real-world project repository data &#8212; My Jupyter Book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/notebook.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/notebook.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1. Scala’s real-world project repository data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparing-and-cleaning-the-data">
+   2. Preparing and cleaning the data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#merging-the-dataframes">
+   3. Merging the DataFrames
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#is-the-project-still-actively-maintained">
+   4. Is the project still actively maintained?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#is-there-camaraderie-in-the-project">
+   5. Is there camaraderie in the project?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-files-were-changed-in-the-last-ten-pull-requests">
+   6. What files were changed in the last ten pull requests?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#who-made-the-most-pull-requests-to-a-given-file">
+   7. Who made the most pull requests to a given file?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#who-made-the-last-ten-pull-requests-on-a-given-file">
+   8. Who made the last ten pull requests on a given file?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-pull-requests-of-two-special-developers">
+   9. The pull requests of two special developers
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-the-contributions-of-each-developer">
+   10. Visualizing the contributions of each developer
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>1. Scala’s real-world project repository data</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1. Scala’s real-world project repository data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#preparing-and-cleaning-the-data">
+   2. Preparing and cleaning the data
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#merging-the-dataframes">
+   3. Merging the DataFrames
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#is-the-project-still-actively-maintained">
+   4. Is the project still actively maintained?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#is-there-camaraderie-in-the-project">
+   5. Is there camaraderie in the project?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-files-were-changed-in-the-last-ten-pull-requests">
+   6. What files were changed in the last ten pull requests?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#who-made-the-most-pull-requests-to-a-given-file">
+   7. Who made the most pull requests to a given file?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#who-made-the-last-ten-pull-requests-on-a-given-file">
+   8. Who made the last ten pull requests on a given file?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-pull-requests-of-two-special-developers">
+   9. The pull requests of two special developers
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-the-contributions-of-each-developer">
+   10. Visualizing the contributions of each developer
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="scala-s-real-world-project-repository-data">
+<h1>1. Scala’s real-world project repository data<a class="headerlink" href="#scala-s-real-world-project-repository-data" title="Permalink to this headline">#</a></h1>
+<p>With almost 30k commits and a history spanning over ten years, Scala is a mature programming language. It is a general-purpose programming language that has recently become another prominent language for data scientists.</p>
+<p>Scala is also an open source project. Open source projects have the advantage that their entire development histories -- who made changes, what was changed, code reviews, etc. -- are publicly available. </p>
+<p>We're going to read in, clean up, and visualize the real world project repository of Scala that spans data from a version control system (Git) as well as a project hosting site (GitHub). We will find out who has had the most influence on its development and who are the experts.</p>
+<p>The dataset we will use, which has been previously mined and extracted from GitHub, is comprised of three files:</p>
+<ol>
+<li><code>pulls_2011-2013.csv</code> contains the basic information about the pull requests, and spans from the end of 2011 up to (but not including) 2014.</li>
+<li><code>pulls_2014-2018.csv</code> contains identical information, and spans from 2014 up to 2018.</li>
+<li><code>pull_files.csv</code> contains the files that were modified by each pull request.</li>
+</ol><div class="cell tag_sample_code docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing pandas</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Loading in the data</span>
+<span class="n">pulls_one</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/pulls_2011-2013.csv&#39;</span><span class="p">)</span>
+<span class="n">pulls_two</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/pulls_2014-2018.csv&#39;</span><span class="p">)</span>
+<span class="n">pull_files</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/pull_files.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Importing pandas</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Loading in the data</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">pulls_one</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/pulls_2011-2013.csv&#39;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preparing-and-cleaning-the-data">
+<h1>2. Preparing and cleaning the data<a class="headerlink" href="#preparing-and-cleaning-the-data" title="Permalink to this headline">#</a></h1>
+<p>First, we will need to combine the data from the two separate pull DataFrames. </p>
+<p>Next, the raw data extracted from GitHub contains dates in the ISO8601 format. However, <code>pandas</code> imports them as regular strings. To make our analysis easier, we need to convert the strings into Python's <code>DateTime</code> objects. <code>DateTime</code> objects have the important property that they can be compared and sorted.</p>
+<p>The pull request times are all in UTC (also known as Coordinated Universal Time). The commit times, however, are in the local time of the author with time zone information (number of hours difference from UTC). To make comparisons easy, we should convert all times to UTC.</p><div class="cell tag_sample_code docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Append pulls_one to pulls_two</span>
+<span class="n">pulls</span> <span class="o">=</span> <span class="n">pulls_one</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pulls_two</span><span class="p">)</span>
+
+<span class="c1"># Convert the date for the pulls object</span>
+<span class="n">pulls</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">pulls</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span><span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="merging-the-dataframes">
+<h1>3. Merging the DataFrames<a class="headerlink" href="#merging-the-dataframes" title="Permalink to this headline">#</a></h1>
+<p>The data extracted comes in two separate files. Merging the two DataFrames will make it easier for us to analyze the data in the future tasks.</p><div class="cell tag_sample_code docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Merge the two DataFrames</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pulls</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pull_files</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;pid&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="is-the-project-still-actively-maintained">
+<h1>4. Is the project still actively maintained?<a class="headerlink" href="#is-the-project-still-actively-maintained" title="Permalink to this headline">#</a></h1>
+<p>The activity in an open source project is not very consistent. Some projects might be active for many years after the initial release, while others can slowly taper out into oblivion. Before committing to contributing to a project, it is important to understand the state of the project. Is development going steadily, or is there a drop? Has the project been abandoned altogether?</p>
+<p>The data used in this project was collected in January of 2018. We are interested in the evolution of the number of contributions up to that date.</p>
+<p>For Scala, we will do this by plotting a chart of the project's activity. We will calculate the number of pull requests submitted each (calendar) month during the project's lifetime. We will then plot these numbers to see the trend of contributions.</p>
+<ul>
+<li><p>A helpful reminder of how to access various components of a date can be found in <a href="https://campus.datacamp.com/courses/data-manipulation-with-pandas/slicing-and-indexing?ex=12">this exercise of Data Manipulation with pandas</a></p></li>
+<li><p>Additionally, recall that you can group by multiple variables by passing a list to <code>.groupby()</code>. This video from <a href="https://campus.datacamp.com/courses/data-manipulation-with-pandas/aggregating-dataframes?ex=9">Data Manipulation with pandas</a> should help!</p></li>
+</ul><div class="cell tag_sample_code docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Create a column that will store the month</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+
+<span class="c1"># Create a column that will store the year</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+
+<span class="c1"># Group by the month and year and count the pull requests</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;month&#39;</span><span class="p">,</span><span class="s1">&#39;year&#39;</span><span class="p">])[</span><span class="s1">&#39;pid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+
+<span class="c1"># Plot the results</span>
+<span class="n">counts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;month,year&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/notebook_7_1.png" src="_images/notebook_7_1.png" />
+</div>
+</div>
+</section>
+<section id="is-there-camaraderie-in-the-project">
+<h1>5. Is there camaraderie in the project?<a class="headerlink" href="#is-there-camaraderie-in-the-project" title="Permalink to this headline">#</a></h1>
+<p>The organizational structure varies from one project to another, and it can influence your success as a contributor. A project that has a very small community might not be the best one to start working on. The small community might indicate a high barrier of entry. This can be caused by several factors, including a community that is reluctant to accept pull requests from "outsiders," that the code base is hard to work with, etc. However, a large community can serve as an indicator that the project is regularly accepting pull requests from new contributors. Such a project would be a good place to start.</p>
+<p>In order to evaluate the dynamics of the community, we will plot a histogram of the number of pull requests submitted by each user. A distribution that shows that there are few people that only contribute a small number of pull requests can be used as in indicator that the project is not welcoming of new contributors. </p><div class="cell tag_sample_code docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Required for matplotlib</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Group by the submitter</span>
+<span class="n">by_user</span> <span class="o">=</span> <span class="n">pulls</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;pid&#39;</span><span class="p">:</span><span class="s1">&#39;count&#39;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">by_user</span><span class="p">)</span>
+<span class="c1"># Plot the histogram</span>
+<span class="n">by_user</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>               pid
+user              
+0xmohit          1
+193s             4
+2m               3
+4.00E+06         2
+AlexeyIvanov8    1
+...            ...
+yinxusen         1
+yllan            2
+ziggystar        2
+zsxwing          2
+zuvizudar        1
+
+[467 rows x 1 columns]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[&lt;AxesSubplot:title={&#39;center&#39;:&#39;pid&#39;}&gt;]], dtype=object)
+</pre></div>
+</div>
+<img alt="_images/notebook_9_2.png" src="_images/notebook_9_2.png" />
+</div>
+</div>
+</section>
+<section id="what-files-were-changed-in-the-last-ten-pull-requests">
+<h1>6. What files were changed in the last ten pull requests?<a class="headerlink" href="#what-files-were-changed-in-the-last-ten-pull-requests" title="Permalink to this headline">#</a></h1>
+<p>Choosing the right place to make a contribution is as important as choosing the project to contribute to. Some parts of the code might be stable, some might be dead. Contributing there might not have the most impact. Therefore it is important to understand the parts of the system that have been recently changed. This allows us to pinpoint the "hot" areas of the code where most of the activity is happening. Focusing on those parts might not the most effective use of our times.</p><div class="cell tag_sample_code docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify the last 10 pull requests</span>
+<span class="n">last_10</span> <span class="o">=</span> <span class="n">pulls</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+
+<span class="c1"># Join the two data sets</span>
+<span class="n">joined_pr</span> <span class="o">=</span> <span class="n">last_10</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pull_files</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;pid&#39;</span><span class="p">)</span>
+
+<span class="c1"># Identify the unique files</span>
+<span class="n">files</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">joined_pr</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+<span class="c1"># Print the results</span>
+<span class="n">files</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;LICENSE&#39;,
+ &#39;doc/LICENSE.md&#39;,
+ &#39;doc/License.rtf&#39;,
+ &#39;project/VersionUtil.scala&#39;,
+ &#39;src/compiler/scala/reflect/reify/phases/Calculate.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/backend/jvm/BCodeHelpers.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/backend/jvm/PostProcessor.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/backend/jvm/analysis/BackendUtils.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/profile/AsyncHelper.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/profile/Profiler.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/symtab/classfile/ClassfileParser.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/typechecker/Contexts.scala&#39;,
+ &#39;src/library/scala/Predef.scala&#39;,
+ &#39;src/library/scala/concurrent/Lock.scala&#39;,
+ &#39;src/library/scala/util/Properties.scala&#39;,
+ &#39;src/reflect/scala/reflect/internal/pickling/ByteCodecs.scala&#39;,
+ &#39;src/reflect/scala/reflect/internal/tpe/GlbLubs.scala&#39;,
+ &#39;src/scaladoc/scala/tools/nsc/doc/html/page/Entity.scala&#39;,
+ &#39;src/scalap/decoder.properties&#39;,
+ &#39;test/files/neg/leibniz-liskov.check&#39;,
+ &#39;test/files/neg/leibniz-liskov.scala&#39;,
+ &#39;test/files/pos/leibniz-liskov.scala&#39;,
+ &#39;test/files/pos/leibniz_liskov.scala&#39;,
+ &#39;test/files/pos/parallel-classloader.scala&#39;,
+ &#39;test/files/pos/t10568/Converter.java&#39;,
+ &#39;test/files/pos/t10568/Impl.scala&#39;,
+ &#39;test/files/pos/t10686.scala&#39;,
+ &#39;test/files/pos/t5638/Among.java&#39;,
+ &#39;test/files/pos/t5638/Usage.scala&#39;,
+ &#39;test/files/pos/t9291.scala&#39;,
+ &#39;test/files/run/t8348.check&#39;,
+ &#39;test/files/run/t8348/TableColumn.java&#39;,
+ &#39;test/files/run/t8348/TableColumnImpl.java&#39;,
+ &#39;test/files/run/t8348/Test.scala&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="who-made-the-most-pull-requests-to-a-given-file">
+<h1>7. Who made the most pull requests to a given file?<a class="headerlink" href="#who-made-the-most-pull-requests-to-a-given-file" title="Permalink to this headline">#</a></h1>
+<p>When contributing to a project, we might need some guidance. We might find ourselves needing some information regarding the codebase. It is important direct any questions to the right person. Contributors to open source projects generally have other day jobs, so their time is limited. It is important to address our questions to the right people. One way to identify the right target for our inquiries is by using their contribution history.</p>
+<p>We identified <code>src/compiler/scala/reflect/reify/phases/Calculate.scala</code> as being recently changed. We are interested in the top 3 developers who changed that file. Those developers are the ones most likely to have the best understanding of the code.</p><div class="cell tag_sample_code docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the file we are interested in:</span>
+<span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;src/compiler/scala/reflect/reify/phases/Calculate.scala&#39;</span>
+
+<span class="c1"># Identify the commits that changed the file</span>
+<span class="n">file_pr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">file</span><span class="p">]</span>
+
+<span class="c1"># Count the number of changes made by each developer</span>
+<span class="n">author_counts</span> <span class="o">=</span> <span class="n">file_pr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;pid&#39;</span><span class="p">:</span><span class="s1">&#39;count&#39;</span><span class="p">})</span>
+
+<span class="c1"># Print the top 3 developers</span>
+<span class="n">author_counts</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s1">&#39;pid&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pid</th>
+    </tr>
+    <tr>
+      <th>user</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>xeno-by</th>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>retronym</th>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>soc</th>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="who-made-the-last-ten-pull-requests-on-a-given-file">
+<h1>8. Who made the last ten pull requests on a given file?<a class="headerlink" href="#who-made-the-last-ten-pull-requests-on-a-given-file" title="Permalink to this headline">#</a></h1>
+<p>Open source projects suffer from fluctuating membership. This makes the problem of finding the right person more challenging: the person has to be knowledgeable <em>and</em> still be involved in the project. A person that contributed a lot in the past might no longer be available (or willing) to help. To get a better understanding, we need to investigate the more recent history of that particular part of the system. </p>
+<p>Like in the previous task, we will look at the history of  <code>src/compiler/scala/reflect/reify/phases/Calculate.scala</code>.</p><div class="cell tag_sample_code docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;src/compiler/scala/reflect/reify/phases/Calculate.scala&#39;</span>
+
+<span class="c1"># Select the pull requests that changed the target file</span>
+<span class="n">file_pr</span> <span class="o">=</span> <span class="n">pull_files</span><span class="p">[</span><span class="n">pull_files</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">file</span><span class="p">]</span>
+
+<span class="c1"># Merge the obtained results with the pulls DataFrame</span>
+<span class="n">joined_pr</span> <span class="o">=</span> <span class="n">file_pr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pulls</span><span class="p">,</span><span class="n">on</span><span class="o">=</span><span class="s1">&#39;pid&#39;</span><span class="p">)</span>
+
+<span class="c1"># Find the users of the last 10 most recent pull requests</span>
+<span class="n">users_last_10</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">joined_pr</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;date&#39;</span><span class="p">)[</span><span class="s1">&#39;user&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+<span class="c1"># Printing the results</span>
+<span class="n">users_last_10</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;bjornregnell&#39;, &#39;retronym&#39;, &#39;soc&#39;, &#39;starblood&#39;, &#39;xeno-by&#39;, &#39;zuvizudar&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-pull-requests-of-two-special-developers">
+<h1>9. The pull requests of two special developers<a class="headerlink" href="#the-pull-requests-of-two-special-developers" title="Permalink to this headline">#</a></h1>
+<p>Now that we have identified two potential contacts in the projects, we need to find the person who was most involved in the project in recent times. That person is most likely to answer our questions. For each calendar year, we are interested in understanding the number of pull requests the authors submitted. This will give us a high-level image of their contribution trend to the project.</p><div class="cell tag_sample_code docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># The developers we are interested in</span>
+<span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;xeno-by&#39;</span><span class="p">,</span> <span class="s1">&#39;soc&#39;</span><span class="p">]</span>
+
+<span class="c1"># Get all the developers&#39; pull requests</span>
+<span class="n">by_author</span> <span class="o">=</span> <span class="n">pulls</span><span class="p">[</span><span class="n">pulls</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">authors</span><span class="p">)]</span>
+
+<span class="c1"># Count the number of pull requests submitted each year</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">by_author</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">by_author</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;pid&#39;</span><span class="p">:</span> <span class="s1">&#39;count&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Convert the table to a wide format</span>
+<span class="n">counts_wide</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;pid&#39;</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Plot the results</span>
+<span class="n">counts_wide</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;date&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/notebook_17_1.png" src="_images/notebook_17_1.png" />
+</div>
+</div>
+</section>
+<section id="visualizing-the-contributions-of-each-developer">
+<h1>10. Visualizing the contributions of each developer<a class="headerlink" href="#visualizing-the-contributions-of-each-developer" title="Permalink to this headline">#</a></h1>
+<p>As mentioned before, it is important to make a distinction between the global expertise and contribution levels and the contribution levels at a more granular level (file, submodule, etc.) In our case, we want to see which of our two developers of interest have the most experience with the code in a given file. We will measure experience by the number of pull requests submitted that affect that file and how recent those pull requests were submitted.</p><div class="cell tag_sample_code docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;xeno-by&#39;</span><span class="p">,</span> <span class="s1">&#39;soc&#39;</span><span class="p">]</span>
+<span class="n">file</span> <span class="o">=</span> <span class="s1">&#39;src/compiler/scala/reflect/reify/phases/Calculate.scala&#39;</span>
+
+<span class="c1"># Select the pull requests submitted by the authors, from the `data` DataFrame</span>
+<span class="n">by_author</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">authors</span><span class="p">)]</span>
+
+<span class="c1"># Select the pull requests that affect the file</span>
+<span class="n">by_file</span> <span class="o">=</span> <span class="n">by_author</span><span class="p">[</span><span class="n">by_author</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">file</span><span class="p">]</span>
+
+<span class="c1"># Group and count the number of PRs done by each user each year</span>
+<span class="n">grouped</span> <span class="o">=</span> <span class="n">by_file</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">by_file</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">&#39;pid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Transform the data into a wide format</span>
+<span class="n">by_file_wide</span> <span class="o">=</span><span class="n">grouped</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;pid&#39;</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Plot the results</span>
+<span class="n">by_file_wide</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;date&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/notebook_19_1.png" src="_images/notebook_19_1.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
